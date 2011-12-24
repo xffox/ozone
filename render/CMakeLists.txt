@@ -1,0 +1,13 @@
+cmake_minimum_required(VERSION 2.6)
+
+include_directories("include")
+
+set(RENDER_SRCS
+    src/KeyboardEvent.cpp
+    )
+
+add_library(render STATIC
+    ${RENDER_SRCS}
+    )
+
+add_subdirectory(opengl)
