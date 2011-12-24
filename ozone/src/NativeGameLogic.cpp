@@ -47,13 +47,6 @@ void NativeGameLogic::save(WorldModel::WorldAccess*)
 void NativeGameLogic::run(WorldModel::WorldAccess*,
     Time)
 {
-#if 0
-    for(Walls::iterator iter = walls.begin(); iter != walls.end();
-        ++iter)
-    {
-        move(**iter, 10.0*difftime);
-    }
-#endif
 }
 
 void NativeGameLogic::process(WorldModel::WorldAccess *worldAccess,
