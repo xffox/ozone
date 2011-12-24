@@ -45,7 +45,7 @@ void NativeGameLogic::save(WorldModel::WorldAccess*)
 }
 
 void NativeGameLogic::run(WorldModel::WorldAccess*,
-    Time difftime)
+    Time)
 {
 #if 0
     for(Walls::iterator iter = walls.begin(); iter != walls.end();
