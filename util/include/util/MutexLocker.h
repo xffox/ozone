@@ -12,8 +12,8 @@ public:
     ~MutexLocker();
 
 private:
-    MutexLocker(const MutexLocker&){}
-    MutexLocker &operator=(const MutexLocker&){return *this;}
+    MutexLocker(const MutexLocker&);
+    MutexLocker &operator=(const MutexLocker&);
 
 private:
     Mutex *mutex;

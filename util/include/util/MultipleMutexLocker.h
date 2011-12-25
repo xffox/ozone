@@ -12,9 +12,8 @@ namespace util
         ~MultipleMutexLocker();
 
     private:
-        MultipleMutexLocker(const MultipleMutexLocker&){}
-        MultipleMutexLocker &operator=(const MultipleMutexLocker&)
-        {return *this;}
+        MultipleMutexLocker(const MultipleMutexLocker&);
+        MultipleMutexLocker &operator=(const MultipleMutexLocker&);
 
     private:
         Mutex *a;

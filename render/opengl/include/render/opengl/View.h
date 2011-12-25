@@ -22,8 +22,8 @@ namespace render
         void draw();
 
     private:
-        View(const View&){}
-        View &operator=(const View&){return *this;}
+        View(const View&);
+        View &operator=(const View&);
 
         void prepare();
         

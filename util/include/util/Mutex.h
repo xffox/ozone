@@ -18,6 +18,10 @@ public:
     void unlock();
 
 private:
+    Mutex(const Mutex&);
+    Mutex &operator=(const Mutex&);
+
+private:
     MutexPrivate *mutexPrivate;
 };
 }

@@ -18,15 +18,6 @@ World::~World()
     clearObjects();
 }
 
-World::World(const World &)
-{
-}
-
-World &World::operator=(const World &)
-{
-    return *this;
-}
-
 void World::clearObjects()
 {
     while(!gameObjects.empty())

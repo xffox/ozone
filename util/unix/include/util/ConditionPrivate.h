@@ -20,8 +20,8 @@ namespace util
         void notifyAll();
 
     private:
-        ConditionPrivate(ConditionPrivate&){}
-        ConditionPrivate& operator=(ConditionPrivate&){return *this;}
+        ConditionPrivate(ConditionPrivate&);
+        ConditionPrivate& operator=(ConditionPrivate&);
 
     private:
         pthread_cond_t cond;

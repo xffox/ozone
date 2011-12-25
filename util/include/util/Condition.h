@@ -19,8 +19,8 @@ namespace util
         void notifyAll();
 
     private:
-        Condition(const Condition&){}
-        Condition &operator=(const Condition&){return *this;}
+        Condition(const Condition&);
+        Condition &operator=(const Condition&);
 
     private:
         ConditionPrivate *conditionPrivate;

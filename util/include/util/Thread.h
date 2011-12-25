@@ -16,6 +16,10 @@ public:
     void join();
 
 private:
+    Thread(const Thread&);
+    Thread &operator=(const Thread&);
+
+private:
     ThreadPrivate *threadPrivate;
 };
 }
