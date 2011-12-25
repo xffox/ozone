@@ -16,6 +16,10 @@ namespace ozone
         virtual void draw(render::Drawer *drawer);
 
     private:
+        RenderClient(const RenderClient&);
+        RenderClient &operator=(const RenderClient&);
+
+    private:
         WorldModel *model;
         RenderLogic *renderLogic;
     };

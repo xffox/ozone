@@ -5,6 +5,7 @@
 namespace util
 {
 MutexPrivate::MutexPrivate()
+    :mutex()
 {
     if(pthread_mutex_init(&mutex, NULL) != 0)
         throw int();

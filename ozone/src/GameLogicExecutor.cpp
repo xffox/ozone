@@ -22,7 +22,7 @@ namespace ozone
 
 GameLogicExecutor::GameLogicExecutor(GameLogic *logic,
     WorldModel *model)
-    :logic(logic), model(model)
+    :logic(logic), model(model), inputQueue()
 {
     if(!logic || !model)
         throw std::exception();

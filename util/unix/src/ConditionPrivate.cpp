@@ -10,6 +10,7 @@
 namespace util
 {
 ConditionPrivate::ConditionPrivate()
+    :cond()
 {
     if(pthread_cond_init(&cond, NULL) != 0)
         throw std::exception();

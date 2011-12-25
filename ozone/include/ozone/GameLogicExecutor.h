@@ -23,6 +23,9 @@ namespace ozone
         void process(const render::KeyboardEvent &keyboardEvent);
 
     private:
+        GameLogicExecutor(const GameLogicExecutor&);
+        GameLogicExecutor &operator=(const GameLogicExecutor&);
+
         void load();
         void save();
         void loop();

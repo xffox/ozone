@@ -6,7 +6,7 @@
 namespace util
 {
 ThreadPrivate::ThreadPrivate()
-    :running(false)
+    :thread(), running(false), mutex()
 {
 }
 

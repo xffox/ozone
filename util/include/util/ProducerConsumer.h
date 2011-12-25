@@ -15,6 +15,8 @@ namespace util
     {
         typedef std::queue<T> Container;
     public:
+        ProducerConsumer();
+
         void produce(const T &val);
         bool consume(T &val);
         bool timedConsume(T &val, const Time &timeout);
@@ -66,6 +68,12 @@ namespace util
         Condition *condition;
         Time timeout;
     };
+
+    template<class T>
+    ProducerConsumer<T>::ProducerConsumer()
+        :container(), mutex(), condition()
+    {
+    }
 
     template<class T>
     void ProducerConsumer<T>::produce(const T &val)

@@ -10,7 +10,7 @@ namespace ozone
 {
 
 NativeGameLogic::NativeGameLogic(GameObjectFactory *factory)
-    :GameLogic(factory), factory(factory)
+    :GameLogic(factory), factory(factory), walls()
 {
 }
 

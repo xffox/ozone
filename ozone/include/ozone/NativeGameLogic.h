@@ -38,6 +38,9 @@ namespace ozone
             const render::KeyboardEvent &keyboardEvent);
 
     private:
+        NativeGameLogic(const NativeGameLogic&);
+        NativeGameLogic &operator=(const NativeGameLogic&);
+
         void createWall(WorldModel::WorldAccess *worldAccess,
             const geom::Point &bottomLeft,
             const geom::Point &topLeft,

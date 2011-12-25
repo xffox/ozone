@@ -20,6 +20,10 @@ namespace ozone
         virtual void process(const render::KeyboardEvent &keyboardEvent);
 
     private:
+        EventClient(const EventClient&);
+        EventClient &operator=(const EventClient&);
+
+    private:
         GameLogicExecutor *executor;
     };
 }

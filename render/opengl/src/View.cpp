@@ -12,7 +12,7 @@ namespace render
 namespace opengl
 {
 View::View()
-    :client(NULL)
+    :client(NULL), drawer()
 {
 }
 

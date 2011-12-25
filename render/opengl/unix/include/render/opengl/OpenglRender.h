@@ -35,6 +35,9 @@ namespace render
         virtual void destroy();
 
     private:
+        OpenglRender(const OpenglRender&);
+        OpenglRender &operator=(const OpenglRender&);
+
         void prepare();
         KeyboardEvent buildKeyboardEvent(unsigned char key, int modifiers,
             int x, int y);

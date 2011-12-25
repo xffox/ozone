@@ -34,6 +34,10 @@ namespace ozone
             void setViewPos(const ViewPos &viewPos);
 
         private:
+            WorldAccess(const WorldAccess&);
+            WorldAccess &operator=(const WorldAccess&);
+
+        private:
             WorldModel *worldModel;
 
         };
@@ -42,6 +46,10 @@ namespace ozone
         WorldModel(World *world);
 
         std::auto_ptr<WorldAccess> access();
+
+    private:
+        WorldModel(const WorldModel&);
+        WorldModel &operator=(const WorldModel&);
 
     private:
         World *world;

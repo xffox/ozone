@@ -7,7 +7,7 @@ namespace ozone
 namespace object
 {
 Wall::Wall()
-    :color(.0f, .0f, .0f)
+    :vertices(), color(.0f, .0f, .0f)
 {
     vertices.resize(4, geom::Point(.0, .0, .0));
 }
@@ -15,7 +15,7 @@ Wall::Wall()
 Wall::Wall(const geom::Point &bottomLeft, const geom::Point &topLeft,
     const geom::Point &bottomRight, const geom::Point &topRight,
     const render::Color &color)
-    :color(color)
+    :vertices(), color(color)
 {
     vertices.reserve(4);
     vertices.push_back(bottomLeft);

@@ -28,8 +28,8 @@ void OpenglRender::MainLoopRunnable::run()
 }
 
 OpenglRender::OpenglRender()
-    :mainLoopThread(new util::Thread),
-    client(NULL), eventClient(NULL)
+    :mainLoopRunnable(), mainLoopThread(new util::Thread),
+    client(NULL), eventClient(NULL), view()
 {
 }
 

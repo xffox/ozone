@@ -43,6 +43,6 @@ namespace ozone
         GameObjects gameObjects;
         ViewPos viewPos;
     };
-};
+}
 
 #endif

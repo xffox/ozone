@@ -3,7 +3,7 @@
 namespace ozone
 {
 FpsCounter::FpsCounter()
-    :frames(0), fps(0)
+    :prevTime(), frames(0), fps(0)
 {
 }
 

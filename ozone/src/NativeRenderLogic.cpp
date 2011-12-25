@@ -9,7 +9,7 @@ namespace ozone
 {
 
 NativeRenderLogic::NativeRenderLogic()
-    :fps(0)
+    :fpsCounter(), fps(0)
 {
 }
 

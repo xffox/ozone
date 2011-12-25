@@ -65,7 +65,7 @@ void WorldModel::WorldAccess::setViewPos(const ViewPos &viewPos)
 }
 
 WorldModel::WorldModel(World *world)
-    :world(world)
+    :world(world), accessMutex()
 {
     if(!world)
         throw std::exception();
