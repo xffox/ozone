@@ -6,7 +6,7 @@ set(LIBRARY_OUTPUT_PATH "${PROJECT_BINARY_DIR}/lib")
 set(EXECUTABLE_OUTPUT_PATH "${PROJECT_BINARY_DIR}/bin")
 
 if(UNIX)
-    set(WARN_FLAGS "-Wall -Wextra")
+    set(WARN_FLAGS "-Wall -Wextra -Weffc++ -pedantic")
     set(DEBUG_FLAGS "")
 elseif(WIN32)
     # "-static" - make it static to run without libs
