@@ -83,7 +83,7 @@ KeyboardEvent OpenglRender::buildKeyboardEvent(unsigned char key,
         buildModifiers |= KeyboardEvent::CTRL;
     if(modifiers & GLUT_ACTIVE_ALT)
         buildModifiers |= KeyboardEvent::ALT;
-    return KeyboardEvent(key, modifiers);
+    return KeyboardEvent(key, buildModifiers);
 }
 
 void OpenglRender::renderFunc()
