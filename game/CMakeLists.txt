@@ -9,9 +9,10 @@ include_directories("include"
     )
 
 set(GAME_SRCS
+    src/Loader.cpp
     src/NativeGameLogic.cpp
     src/NativeGameObjectFactory.cpp
     src/NativeRenderLogic.cpp
     )
 
-add_library(game SHARED ${GAME_SRCS})
+add_library(game MODULE ${GAME_SRCS})

@@ -10,6 +10,8 @@
 
 namespace ozone
 {
+    class GameModule;
+
     class Game
     {
     public:
@@ -23,6 +25,10 @@ namespace ozone
     private:
         Game(const Game&);
         Game &operator=(const Game&);
+
+    private:
+        void *handle;
+        GameModule *gameModule;
     };
 }
 
