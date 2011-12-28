@@ -1,11 +1,13 @@
-#include "ozone/NativeRenderLogic.h"
+#include "game/NativeRenderLogic.h"
 
 #include <sstream>
 
 #include "render/Drawer.h"
 #include "ozone/GameObject.h"
 
-namespace ozone
+using namespace ozone;
+
+namespace game
 {
 
 NativeRenderLogic::NativeRenderLogic()

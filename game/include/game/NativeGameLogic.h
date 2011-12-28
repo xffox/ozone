@@ -22,36 +22,39 @@ namespace ozone
         class Point;
         class Wall;
     }
+}
 
-    class NativeGameLogic: public GameLogic
+namespace game
+{
+    class NativeGameLogic: public ozone::GameLogic
     {
-        typedef std::vector<object::Wall*> Walls;
+        typedef std::vector<ozone::object::Wall*> Walls;
 
     public:
-        NativeGameLogic(GameObjectFactory *factory);
+        NativeGameLogic(ozone::GameObjectFactory *factory);
 
-        virtual void load(WorldModel::WorldAccess *worldAccess);
-        virtual void save(WorldModel::WorldAccess *worldAccess);
-        virtual void run(WorldModel::WorldAccess *worldAccess,
-            Time difftime);
-        virtual void process(WorldModel::WorldAccess *worldAccess,
+        virtual void load(ozone::WorldModel::WorldAccess *worldAccess);
+        virtual void save(ozone::WorldModel::WorldAccess *worldAccess);
+        virtual void run(ozone::WorldModel::WorldAccess *worldAccess,
+            ozone::Time difftime);
+        virtual void process(ozone::WorldModel::WorldAccess *worldAccess,
             const render::KeyboardEvent &keyboardEvent);
 
     private:
         NativeGameLogic(const NativeGameLogic&);
         NativeGameLogic &operator=(const NativeGameLogic&);
 
-        void createWall(WorldModel::WorldAccess *worldAccess,
+        void createWall(ozone::WorldModel::WorldAccess *worldAccess,
             const geom::Point &bottomLeft,
             const geom::Point &topLeft,
             const geom::Point &bottomRight,
             const geom::Point &topRight,
             const render::Color &color);
 
-        void move(object::Wall &wall, double dist);
+        void move(ozone::object::Wall &wall, double dist);
 
     private:
-        GameObjectFactory *factory;
+        ozone::GameObjectFactory *factory;
 
         Walls walls;
     };

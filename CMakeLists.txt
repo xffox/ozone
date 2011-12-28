@@ -20,4 +20,5 @@ set(CMAKE_CXX_FLAGS
 add_subdirectory(util)
 add_subdirectory(render)
 add_subdirectory(geom)
+add_subdirectory(game)
 add_subdirectory(ozone)

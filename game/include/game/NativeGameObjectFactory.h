@@ -3,12 +3,13 @@
 
 #include "ozone/GameObjectFactory.h"
 
-namespace ozone
+namespace game
 {
-    class NativeGameObjectFactory: public GameObjectFactory
+    class NativeGameObjectFactory: public ozone::GameObjectFactory
     {
     public:
-        virtual GameObject *CreateObject(WorldModel::WorldAccess *access,
+        virtual ozone::GameObject *CreateObject(
+            ozone::WorldModel::WorldAccess *access,
             const std::string &type);
     };
 }

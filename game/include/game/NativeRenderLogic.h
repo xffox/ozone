@@ -4,21 +4,21 @@
 #include "ozone/RenderLogic.h"
 #include "ozone/FpsCounter.h"
 
-namespace ozone
+namespace game
 {
-    class NativeRenderLogic: public RenderLogic
+    class NativeRenderLogic: public ozone::RenderLogic
     {
     public:
         NativeRenderLogic();
 
-        virtual void draw(WorldModel::WorldAccess *worldAccess,
+        virtual void draw(ozone::WorldModel::WorldAccess *worldAccess,
             render::Drawer *drawer);
 
     private:
         void drawFps(render::Drawer *drawer);
 
     private:
-        FpsCounter fpsCounter;
+        ozone::FpsCounter fpsCounter;
         unsigned int fps;
     };
 }

@@ -1,11 +1,13 @@
-#include "ozone/NativeGameObjectFactory.h"
+#include "game/NativeGameObjectFactory.h"
 
 #include <memory>
 
 #include "ozone/object/Point.h"
 #include "ozone/object/Wall.h"
 
-namespace ozone
+using namespace ozone;
+
+namespace game
 {
 
 GameObject *NativeGameObjectFactory::CreateObject(

@@ -1,4 +1,4 @@
-#include "ozone/NativeGameLogic.h"
+#include "game/NativeGameLogic.h"
 
 #include "render/Color.h"
 #include "render/KeyboardEvent.h"
@@ -6,7 +6,9 @@
 #include "ozone/object/Point.h"
 #include "ozone/object/Wall.h"
 
-namespace ozone
+using namespace ozone;
+
+namespace game
 {
 
 NativeGameLogic::NativeGameLogic(GameObjectFactory *factory)

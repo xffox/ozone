@@ -5,6 +5,7 @@ include_directories("include"
     "${PROJECT_SOURCE_DIR}/util/include"
     "${PROJECT_SOURCE_DIR}/render/opengl/include"
     "${PROJECT_SOURCE_DIR}/geom/include"
+    "${PROJECT_SOURCE_DIR}/game/include"
     )
 
 set(OZONE_SRCS
@@ -16,10 +17,7 @@ set(OZONE_SRCS
     src/WorldModel.cpp
     src/GameLogicExecutor.cpp
     src/FpsCounter.cpp
-
-    src/NativeGameLogic.cpp
-    src/NativeGameObjectFactory.cpp
-    src/NativeRenderLogic.cpp
+    src/Game.cpp
 
     src/object/Point.cpp
     src/object/Wall.cpp
@@ -40,4 +38,4 @@ endif()
 add_executable(ozone
     ${OZONE_SRCS}
     )
-target_link_libraries(ozone geom render openglrender)
+target_link_libraries(ozone geom render openglrender game)
