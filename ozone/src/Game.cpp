@@ -8,10 +8,10 @@
 
 namespace ozone
 {
-Game::Game(const std::string&)
+Game::Game(const std::string &path)
     :handle(NULL), gameModule(NULL)
 {
-    handle = dlopen("lib/libgame.so", RTLD_LAZY);
+    handle = dlopen(path.c_str(), RTLD_LAZY);
     if(!handle)
         throw std::exception();
     dlerror();

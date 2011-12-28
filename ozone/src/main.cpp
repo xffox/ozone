@@ -16,7 +16,7 @@ using namespace ozone;
 
 int main()
 {
-    Game curGame((std::string()));
+    Game curGame("lib/libgame.so");
 
     std::auto_ptr<World> world(new World);
     std::auto_ptr<WorldModel> worldModel(new WorldModel(world.get()));
