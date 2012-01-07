@@ -1,6 +1,7 @@
 #include "game/NativeGameLogic.h"
 
 #include "render/Color.h"
+#include "render/Event.h"
 #include "render/KeyboardEvent.h"
 #include "ozone/GameObjectFactory.h"
 #include "ozone/object/Point.h"
@@ -52,31 +53,36 @@ void NativeGameLogic::run(WorldModel::WorldAccess*,
 }
 
 void NativeGameLogic::process(WorldModel::WorldAccess *worldAccess,
-    const render::KeyboardEvent &keyboardEvent)
+    const render::Event &event)
 {
-    ViewPos viewPos = worldAccess->getViewPos();
-    bool moved = false;
-    switch(keyboardEvent.getKey())
+    const render::KeyboardEvent *keyboardEvent =
+        dynamic_cast<const render::KeyboardEvent*>(&event);
+    if(keyboardEvent)
     {
-    case 's':
-        viewPos[2] += 1.0f;
-        moved = true;
-        break;
-    case 'w':
-        viewPos[2] -= 1.0f;
-        moved = true;
-        break;
-    case 'd':
-        viewPos[0] += 1.0f;
-        moved = true;
-        break;
-    case 'a':
-        viewPos[0] -= 1.0f;
-        moved = true;
-        break;
+        ViewPos viewPos = worldAccess->getViewPos();
+        bool moved = false;
+        switch(keyboardEvent->getKey())
+        {
+        case 's':
+            viewPos[2] += 1.0f;
+            moved = true;
+            break;
+        case 'w':
+            viewPos[2] -= 1.0f;
+            moved = true;
+            break;
+        case 'd':
+            viewPos[0] += 1.0f;
+            moved = true;
+            break;
+        case 'a':
+            viewPos[0] -= 1.0f;
+            moved = true;
+            break;
+        }
+        if(moved)
+            worldAccess->setViewPos(viewPos);
     }
-    if(moved)
-        worldAccess->setViewPos(viewPos);
 }
 
 void NativeGameLogic::createWall(WorldModel::WorldAccess *worldAccess,

@@ -3,7 +3,7 @@
 
 #include "ozone/Defs.h"
 
-#include "render/KeyboardEvent.h"
+#include "render/Event.h"
 #include "util/ProducerConsumer.h"
 #include "util/Time.h"
 
@@ -17,10 +17,11 @@ namespace ozone
     public:
         GameLogicExecutor(GameLogic *logic,
             WorldModel *model);
+        ~GameLogicExecutor();
 
         void exec();
 
-        void process(const render::KeyboardEvent &keyboardEvent);
+        void process(const render::Event &keyboardEvent);
 
     private:
         GameLogicExecutor(const GameLogicExecutor&);
@@ -30,10 +31,12 @@ namespace ozone
         void save();
         void loop();
 
+        void clearEvents();
+
     private:
         GameLogic *logic;
         WorldModel *model;
-        util::ProducerConsumer<render::KeyboardEvent> inputQueue;
+        util::ProducerConsumer<render::Event*> inputQueue;
 
     private:
         static const util::Time iterationTime;

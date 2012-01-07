@@ -15,10 +15,10 @@ EventClient::EventClient(GameLogicExecutor *executor)
         throw std::exception();
 }
 
-void EventClient::process(const render::KeyboardEvent &keyboardEvent)
+void EventClient::process(const render::Event &event)
 {
     assert(executor);
-    executor->process(keyboardEvent);
+    executor->process(event);
 }
 
 }

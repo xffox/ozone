@@ -3,14 +3,14 @@
 
 namespace render
 {
-    class KeyboardEvent;
+    class Event;
 
     class EventClient
     {
     public:
         virtual ~EventClient(){}
 
-        virtual void process(const KeyboardEvent &keyboardEvent) = 0;
+        virtual void process(const Event &event) = 0;
     };
 }
 

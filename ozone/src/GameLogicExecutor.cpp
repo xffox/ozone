@@ -28,6 +28,11 @@ GameLogicExecutor::GameLogicExecutor(GameLogic *logic,
         throw std::exception();
 }
 
+GameLogicExecutor::~GameLogicExecutor()
+{
+    clearEvents();
+}
+
 void GameLogicExecutor::load()
 {
     std::auto_ptr<WorldModel::WorldAccess> access(model->access());
@@ -47,16 +52,16 @@ void GameLogicExecutor::exec()
     save();
 }
 
-void GameLogicExecutor::process(const render::KeyboardEvent &keyboardEvent)
+void GameLogicExecutor::process(const render::Event &event)
 {
-    inputQueue.produce(keyboardEvent);
+    inputQueue.produce(event.clone().release());
 }
 
 void GameLogicExecutor::loop()
 {
     util::Time nowTime;
     util::Time prevTime(util::Time::now());
-    render::KeyboardEvent event;
+    render::Event *event = NULL;
     do
     {
         {
@@ -69,9 +74,19 @@ void GameLogicExecutor::loop()
         if(inputQueue.timedConsume(event, iterationTime))
         {
             std::auto_ptr<WorldModel::WorldAccess> access(model->access());
-            logic->process(access.get(), event);
+            logic->process(access.get(), *event);
+            delete event;
         }
     }while(true);
+}
+
+void GameLogicExecutor::clearEvents()
+{
+    render::Event *event = 0;
+    while(inputQueue.timedConsume(event, 0))
+    {
+        delete event;
+    }
 }
 
 const util::Time GameLogicExecutor::iterationTime(1);

@@ -6,7 +6,7 @@
 
 namespace render
 {
-    class KeyboardEvent;
+    class Event;
 }
 
 namespace ozone
@@ -24,7 +24,7 @@ namespace ozone
         virtual void run(WorldModel::WorldAccess *worldAccess,
             Time difftime) = 0;
         virtual void process(WorldModel::WorldAccess *worldAccess,
-            const render::KeyboardEvent &keyboardEvent) = 0;
+            const render::Event &event) = 0;
     };
 }
 

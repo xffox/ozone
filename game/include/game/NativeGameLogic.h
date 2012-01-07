@@ -38,7 +38,7 @@ namespace game
         virtual void run(ozone::WorldModel::WorldAccess *worldAccess,
             ozone::Time difftime);
         virtual void process(ozone::WorldModel::WorldAccess *worldAccess,
-            const render::KeyboardEvent &keyboardEvent);
+            const render::Event &event);
 
     private:
         NativeGameLogic(const NativeGameLogic&);

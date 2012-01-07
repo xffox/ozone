@@ -1,9 +1,11 @@
 #ifndef RENDER_KEYBOARD_EVENT_H
 #define RENDER_KEYBOARD_EVENT_H
 
+#include "render/Event.h"
+
 namespace render
 {
-    class KeyboardEvent
+    class KeyboardEvent: public Event
     {
     public:
         enum ModifiersFlags
@@ -15,6 +17,9 @@ namespace render
 
     public:
         KeyboardEvent(int key = 0, unsigned char modifiers = 0);
+
+        virtual std::auto_ptr<Event> clone() const;
+        virtual void accept(EventVisitor &visitor);
 
         int getKey() const
         {

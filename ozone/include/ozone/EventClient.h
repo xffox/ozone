@@ -17,7 +17,7 @@ namespace ozone
     public:
         EventClient(GameLogicExecutor *executor);
 
-        virtual void process(const render::KeyboardEvent &keyboardEvent);
+        virtual void process(const render::Event &event);
 
     private:
         EventClient(const EventClient&);
