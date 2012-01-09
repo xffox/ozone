@@ -1,9 +1,9 @@
-#include "ozone/object/Point.h"
+#include "game/object/Point.h"
 
 #include "render/Drawer.h"
 #include "render/Color.h"
 
-namespace ozone
+namespace game
 {
 namespace object
 {

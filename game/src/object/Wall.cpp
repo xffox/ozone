@@ -1,8 +1,8 @@
-#include "ozone/object/Wall.h"
+#include "game/object/Wall.h"
 
 #include "render/Drawer.h"
 
-namespace ozone
+namespace game
 {
 namespace object
 {

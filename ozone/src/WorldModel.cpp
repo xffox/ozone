@@ -64,6 +64,16 @@ void WorldModel::WorldAccess::setViewPos(const ViewPos &viewPos)
     worldModel->world->setViewPos(viewPos);
 }
 
+const ViewAngle &WorldModel::WorldAccess::getViewAngle() const
+{
+    return worldModel->world->getViewAngle();
+}
+
+void WorldModel::WorldAccess::setViewAngle(const ViewAngle &viewAngle)
+{
+    worldModel->world->setViewAngle(viewAngle);
+}
+
 WorldModel::WorldModel(World *world)
     :world(world), accessMutex()
 {

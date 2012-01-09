@@ -7,6 +7,7 @@
 #include "render/Client.h"
 #include "render/EventClient.h"
 #include "render/KeyboardEvent.h"
+#include "render/MouseMotionEvent.h"
 
 namespace render
 {
@@ -19,6 +20,8 @@ void OpenglRender::MainLoopRunnable::run()
     glutDisplayFunc(renderFunc);
     glutIdleFunc(idleFunc);
     glutKeyboardFunc(keyboardFunc);
+    glutMotionFunc(motionFunc);
+    glutPassiveMotionFunc(motionFunc);
 
     currentRender->view.init(currentRender->client);
 
@@ -102,6 +105,13 @@ void OpenglRender::keyboardFunc(unsigned char key, int x, int y)
     assert(currentRender->eventClient);
     currentRender->eventClient->process(
         currentRender->buildKeyboardEvent(key, glutGetModifiers(), x, y));
+}
+
+void OpenglRender::motionFunc(int x, int y)
+{
+    assert(currentRender);
+    assert(currentRender->eventClient);
+    currentRender->eventClient->process(MouseMotionEvent(x, y));
 }
 
 OpenglRender *OpenglRender::currentRender = NULL;

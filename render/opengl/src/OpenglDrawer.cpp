@@ -28,18 +28,19 @@ namespace render
 namespace opengl
 {
 OpenglDrawer::OpenglDrawer()
-    :x(.0f), y(.0f), z(.0f)
 {
 }
 
-void OpenglDrawer::moveTo(float x, float y, float z)
+void OpenglDrawer::move(float x, float y, float z)
 {
     glMatrixMode(GL_MODELVIEW);
-    glTranslatef(x - this->x, y - this->y, z - this->z);
+    glTranslatef(-x, -y, -z);
+}
 
-    this->x = x;
-    this->y = y;
-    this->z = z;
+void OpenglDrawer::rotate(float angleDegrees, float x, float y, float z)
+{
+    glMatrixMode(GL_MODELVIEW);
+    glRotatef(-angleDegrees, x, y, z);
 }
 
 void OpenglDrawer::drawPoint(float x, float y, const Color &color)

@@ -9,7 +9,7 @@ namespace ozone
 {
 
 World::World()
-    :gameObjects(), viewPos(3)
+    :gameObjects(), viewPos(3), viewAngle(3)
 {
 }
 

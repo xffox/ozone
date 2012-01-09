@@ -4,6 +4,7 @@ include_directories("include")
 
 set(RENDER_SRCS
     src/KeyboardEvent.cpp
+    src/MouseMotionEvent.cpp
     )
 
 add_library(render STATIC

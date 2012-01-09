@@ -4,6 +4,7 @@
 namespace render
 {
     class KeyboardEvent;
+    class MouseMotionEvent;
 
     class EventVisitor
     {
@@ -11,6 +12,7 @@ namespace render
         virtual ~EventVisitor(){}
 
         virtual void visitKeyboardEvent(const KeyboardEvent&){}
+        virtual void visitMouseMotionEvent(const MouseMotionEvent&){}
     };
 }
 

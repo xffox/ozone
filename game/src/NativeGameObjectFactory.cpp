@@ -2,8 +2,8 @@
 
 #include <memory>
 
-#include "ozone/object/Point.h"
-#include "ozone/object/Wall.h"
+#include "game/object/Point.h"
+#include "game/object/Wall.h"
 
 using namespace ozone;
 

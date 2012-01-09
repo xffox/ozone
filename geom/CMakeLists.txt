@@ -4,8 +4,9 @@ include_directories("include")
 
 set(GEOM_SRCS
     src/Point.cpp
+    src/Angle.cpp
     )
 
-add_library(geom STATIC
+add_library(geom SHARED
     ${GEOM_SRCS}
     )

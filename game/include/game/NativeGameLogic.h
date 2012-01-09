@@ -15,20 +15,17 @@ namespace geom
     class Point;
 }
 
-namespace ozone
+namespace game
 {
     namespace object
     {
         class Point;
         class Wall;
     }
-}
 
-namespace game
-{
     class NativeGameLogic: public ozone::GameLogic
     {
-        typedef std::vector<ozone::object::Wall*> Walls;
+        typedef std::vector<game::object::Wall*> Walls;
 
     public:
         NativeGameLogic(ozone::GameObjectFactory *factory);
@@ -51,12 +48,13 @@ namespace game
             const geom::Point &topRight,
             const render::Color &color);
 
-        void move(ozone::object::Wall &wall, double dist);
-
     private:
         ozone::GameObjectFactory *factory;
 
         Walls walls;
+
+        int mouseX;
+        int mouseY;
     };
 }
 

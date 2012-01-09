@@ -21,7 +21,8 @@ namespace render
     public:
         virtual ~Drawer(){}
 
-        virtual void moveTo(float x, float y, float z) = 0;
+        virtual void move(float x, float y, float z) = 0;
+        virtual void rotate(float angleDegree, float x, float y, float z) = 0;
 
         virtual void drawPoint(float x, float y,
             const Color &color) = 0;

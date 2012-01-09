@@ -1,5 +1,5 @@
-#ifndef OZONE_OBJECT_WALL_H
-#define OZONE_OBJECT_WALL_H
+#ifndef GAME_OBJECT_WALL_H
+#define GAME_OBJECT_WALL_H
 
 #include "geom/Point.h"
 #include "render/Color.h"
@@ -7,11 +7,11 @@
 
 #include <vector>
 
-namespace ozone
+namespace game
 {
     namespace object
     {
-    class Wall: public GameObject
+    class Wall: public ozone::GameObject
     {
         typedef std::vector<geom::Point> Vertices;
 

@@ -18,9 +18,6 @@ set(OZONE_SRCS
     src/GameLogicExecutor.cpp
     src/FpsCounter.cpp
     src/Game.cpp
-
-    src/object/Point.cpp
-    src/object/Wall.cpp
     )
 
 if(UNIX)

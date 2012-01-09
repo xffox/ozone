@@ -1,14 +1,14 @@
-#ifndef OZONE_OBJECT_POINT_H
-#define OZONE_OBJECT_POINT_H
+#ifndef GAME_OBJECT_POINT_H
+#define GAME_OBJECT_POINT_H
 
 #include "ozone/GameObject.h"
 
-namespace ozone
+namespace game
 {
     namespace object
     {
 
-    class Point: public GameObject
+    class Point: public ozone::GameObject
     {
     public:
         Point();

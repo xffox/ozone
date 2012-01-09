@@ -33,6 +33,9 @@ namespace ozone
             const ViewPos &getViewPos() const;
             void setViewPos(const ViewPos &viewPos);
 
+            const ViewAngle &getViewAngle() const;
+            void setViewAngle(const ViewAngle &viewAngle);
+
         private:
             WorldAccess(const WorldAccess&);
             WorldAccess &operator=(const WorldAccess&);

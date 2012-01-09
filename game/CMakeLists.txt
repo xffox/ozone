@@ -13,6 +13,9 @@ set(GAME_SRCS
     src/NativeGameLogic.cpp
     src/NativeGameObjectFactory.cpp
     src/NativeRenderLogic.cpp
+
+    src/object/Point.cpp
+    src/object/Wall.cpp
     )
 
 add_library(game MODULE ${GAME_SRCS})

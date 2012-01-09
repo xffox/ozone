@@ -46,6 +46,7 @@ namespace render
         static void renderFunc();
         static void idleFunc();
         static void keyboardFunc(unsigned char key, int x, int y);
+        static void motionFunc(int x, int y);
 
     private:
         MainLoopRunnable mainLoopRunnable;

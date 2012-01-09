@@ -12,7 +12,8 @@ namespace render
     public:
         OpenglDrawer();
 
-        virtual void moveTo(float x, float y, float z);
+        virtual void move(float x, float y, float z);
+        virtual void rotate(float angleDegrees, float x, float y, float z);
 
         virtual void drawPoint(float x, float y, const Color &color);
         virtual void drawQuadrilateralsStrip(const Vertices &vertices,
@@ -21,11 +22,6 @@ namespace render
 
     private:
         void drawString(const std::string &str);
-
-    private:
-        float x;
-        float y;
-        float z;
     };
     }
 }

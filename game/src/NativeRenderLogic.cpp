@@ -1,6 +1,7 @@
 #include "game/NativeRenderLogic.h"
 
 #include <sstream>
+#include <math.h>
 
 #include "render/Drawer.h"
 #include "ozone/GameObject.h"
@@ -21,8 +22,13 @@ void NativeRenderLogic::draw(WorldModel::WorldAccess *worldAccess,
     if(!worldAccess || !drawer)
         return;
 
+    const ViewAngle &viewAngle = worldAccess->getViewAngle();
+    drawer->rotate(viewAngle[2].getDegrees(), .0f, .0f, 1.0f);
+    drawer->rotate(viewAngle[0].getDegrees(), 1.0f, .0f, .0f);
+    drawer->rotate(viewAngle[1].getDegrees(), .0f, 1.0f, .0f);
+
     const ViewPos &viewPos = worldAccess->getViewPos();
-    drawer->moveTo(-viewPos[0], -viewPos[1], -viewPos[2]);
+    drawer->move(viewPos[0], viewPos[1], viewPos[2]);
 
     const size_t objectsCount = worldAccess->objectsCount();
     for(size_t i = 0; i < objectsCount; ++i)

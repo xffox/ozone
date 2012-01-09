@@ -32,6 +32,16 @@ namespace ozone
             this->viewPos = viewPos;
         }
 
+        const ViewAngle &getViewAngle() const
+        {
+            return viewAngle;
+        }
+
+        void setViewAngle(const ViewAngle &viewAngle)
+        {
+            this->viewAngle = viewAngle;
+        }
+
     private:
         World(const World &);
         World &operator=(const World &);
@@ -41,7 +51,11 @@ namespace ozone
     public:
         // TODO: private
         GameObjects gameObjects;
+
+    private:
         ViewPos viewPos;
+        // TODO: formal angles definition
+        ViewAngle viewAngle;
     };
 }
 
