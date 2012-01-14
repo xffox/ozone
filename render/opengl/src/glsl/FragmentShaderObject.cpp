@@ -18,7 +18,13 @@ FragmentShaderObject::FragmentShaderObject()
 
 FragmentShaderObject::~FragmentShaderObject()
 {
-    glDeleteShader(name);
+    try
+    {
+        glDeleteShader(name);
+    }
+    catch(...)
+    {
+    }
 }
 
 }

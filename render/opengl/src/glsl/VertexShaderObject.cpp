@@ -18,7 +18,13 @@ VertexShaderObject::VertexShaderObject()
 
 VertexShaderObject::~VertexShaderObject()
 {
-    glDeleteShader(name);
+    try
+    {
+        glDeleteShader(name);
+    }
+    catch(...)
+    {
+    }
 }
 
 }

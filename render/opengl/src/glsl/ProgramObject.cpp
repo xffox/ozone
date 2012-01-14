@@ -22,7 +22,13 @@ ProgramObject::ProgramObject()
 
 ProgramObject::~ProgramObject()
 {
-    glDeleteProgram(name);
+    try
+    {
+        glDeleteProgram(name);
+    }
+    catch(...)
+    {
+    }
 }
 
 void ProgramObject::use()
