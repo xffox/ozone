@@ -19,3 +19,16 @@ set(GAME_SRCS
     )
 
 add_library(game MODULE ${GAME_SRCS})
+
+file(GLOB GAME_SHADERS ${CMAKE_CURRENT_SOURCE_DIR}/res/shader/*)
+
+set(SHADERS_DIR "${PROJECT_BINARY_DIR}/shader")
+add_custom_target(shaders_directory ALL
+    ${CMAKE_COMMAND} -E make_directory "${SHADERS_DIR}"
+    DEPENDS game)
+foreach(SHADER_PATH IN LISTS GAME_SHADERS)
+    get_filename_component(SHADER "${SHADER_PATH}" NAME)
+    add_custom_target("${SHADER}" ALL
+        ${CMAKE_COMMAND} -E copy_if_different "${SHADER_PATH}" "${SHADERS_DIR}"
+        DEPENDS shaders_directory)
+endforeach()

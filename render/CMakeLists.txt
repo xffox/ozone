@@ -7,7 +7,7 @@ set(RENDER_SRCS
     src/MouseMotionEvent.cpp
     )
 
-add_library(render STATIC
+add_library(render SHARED
     ${RENDER_SRCS}
     )
 

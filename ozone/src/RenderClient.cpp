@@ -18,6 +18,18 @@ RenderClient::RenderClient(WorldModel *model, RenderLogic *renderLogic)
         throw std::exception();
 }
 
+void RenderClient::init()
+{
+    assert(renderLogic);
+    renderLogic->init();
+}
+
+void RenderClient::destroy()
+{
+    assert(renderLogic);
+    renderLogic->destroy();
+}
+
 void RenderClient::draw(render::Drawer *drawer)
 {
     assert(renderLogic);

@@ -1,5 +1,6 @@
 #include "render/opengl/View.h"
 
+#include <GL/glew.h>
 #include <GL/glu.h>
 
 #include <exception>
@@ -48,6 +49,8 @@ void View::destroy()
     if(!client)
         throw std::exception();
 
+    cleanup();
+
     client = NULL;
 }
 
@@ -63,16 +66,34 @@ void View::draw()
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
+    resetShaders();
     client->draw(&drawer);
     glFlush();
 }
 
 void View::prepare()
 {
+    assert(client);
+
+    glewInit();
     glEnable(GL_DEPTH_TEST);
     glClearColor(.0, .0, .0, .0);
     glMatrixMode(GL_PROJECTION);
     gluPerspective(90.0, 4.0/3.0, 0.1f, 200.0f);
+
+    client->init();
+}
+
+void View::cleanup()
+{
+    assert(client);
+
+    client->destroy();
+}
+
+void View::resetShaders()
+{
+    glUseProgram(0);
 }
 }
 }

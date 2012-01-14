@@ -13,6 +13,8 @@ namespace ozone
     public:
         RenderClient(WorldModel *model, RenderLogic *renderLogic);
 
+        virtual void init();
+        virtual void destroy();
         virtual void draw(render::Drawer *drawer);
 
     private:

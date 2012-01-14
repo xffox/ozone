@@ -2,6 +2,7 @@
 #define OZONE_NATIVE_GAME_LOGIC_H
 
 #include <vector>
+#include <memory>
 
 #include "ozone/GameLogic.h"
 

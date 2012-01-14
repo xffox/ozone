@@ -9,6 +9,16 @@ include_directories("include"
 set(OPENGL_RENDER_SRCS
     src/OpenglDrawer.cpp
     src/View.cpp
+
+    src/glsl/ShaderObject.cpp
+    src/glsl/VertexShaderObject.cpp
+    src/glsl/FragmentShaderObject.cpp
+    src/glsl/ProgramObject.cpp
+    src/glsl/ShaderCompiler.cpp
+
+    src/glsl/ShaderException.cpp
+    src/glsl/ShaderCompileException.cpp
+    src/glsl/ShaderLinkException.cpp
     )
 
 if(UNIX)
@@ -27,7 +37,7 @@ else()
     message(SEND_ERROR "unsupported OS")
 endif()
 
-add_library(openglrender STATIC
+add_library(openglrender SHARED
     ${OPENGL_RENDER_SRCS}
     )
 
@@ -35,6 +45,7 @@ if(UNIX)
     target_link_libraries(openglrender render
         glut
         GLU
+        GLEW
         util
         )
 elseif(WIN32)

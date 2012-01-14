@@ -30,6 +30,6 @@ else()
     message(SEND_ERROR "unsupported OS")
 endif()
 
-add_library(util STATIC
+add_library(util SHARED
     ${UTIL_SRCS}
     )

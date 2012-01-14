@@ -26,7 +26,10 @@ namespace render
         View &operator=(const View&);
 
         void prepare();
+        void cleanup();
         
+        void resetShaders();
+
     private:
         Client *client;
         OpenglDrawer drawer;

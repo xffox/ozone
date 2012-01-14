@@ -10,6 +10,8 @@ namespace render
     public:
         virtual ~Client(){}
 
+        virtual void init() = 0;
+        virtual void destroy() = 0;
         virtual void draw(Drawer *drawer) = 0;
     };
 }
