@@ -1,6 +1,7 @@
 #ifndef UTIL_INDEX_PROVIDER_H
 #define UTIL_INDEX_PROVIDER_H
 
+#include <cstddef>
 #include <vector>
 
 namespace util
