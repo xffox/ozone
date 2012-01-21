@@ -9,6 +9,7 @@ set(UTIL_SRCS
     src/Condition.cpp
     src/Thread.cpp
     src/Time.cpp
+    src/IndexProvider.cpp
     )
 
 if(UNIX)
@@ -33,3 +34,8 @@ endif()
 add_library(util SHARED
     ${UTIL_SRCS}
     )
+if(UNIX)
+    target_link_libraries(util pthread rt)
+endif(UNIX)
+
+add_subdirectory(test)

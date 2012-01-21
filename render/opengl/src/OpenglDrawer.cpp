@@ -27,20 +27,50 @@ namespace render
 {
 namespace opengl
 {
-OpenglDrawer::OpenglDrawer()
+OpenglDrawer::OpenglDrawer(View &view)
+    :view(view)
 {
 }
 
-void OpenglDrawer::move(float x, float y, float z)
+void OpenglDrawer::pushModelView()
 {
-    glMatrixMode(GL_MODELVIEW);
-    glTranslatef(-x, -y, -z);
+    push(GL_MODELVIEW);
 }
 
-void OpenglDrawer::rotate(float angleDegrees, float x, float y, float z)
+void OpenglDrawer::popModelView()
 {
-    glMatrixMode(GL_MODELVIEW);
-    glRotatef(-angleDegrees, x, y, z);
+    pop(GL_MODELVIEW);
+}
+
+void OpenglDrawer::translateModelView(float x, float y, float z)
+{
+    translate(GL_MODELVIEW, x, y, z);
+}
+
+void OpenglDrawer::rotateModelView(float angleDegrees, float x, float y, float z)
+{
+    rotate(GL_MODELVIEW, angleDegrees, x, y, z);
+}
+
+void OpenglDrawer::pushProjection()
+{
+    push(GL_PROJECTION);
+}
+
+void OpenglDrawer::popProjection()
+{
+    pop(GL_PROJECTION);
+}
+
+void OpenglDrawer::translateProjection(float x, float y, float z)
+{
+    translate(GL_PROJECTION, x, y, z);
+}
+
+void OpenglDrawer::rotateProjection(float angleDegree,
+    float x, float y, float z)
+{
+    rotate(GL_PROJECTION, angleDegree, x, y, z);
 }
 
 void OpenglDrawer::drawPoint(float x, float y, const Color &color)
@@ -69,12 +99,24 @@ void OpenglDrawer::drawQuadrilateralsStrip(const Vertices &vertices,
 
     glColor4f(color.r, color.g, color.b, color.a);
     glBegin(GL_QUAD_STRIP);
+        glNormal3f(.0f, .0f, -1.0f);
         std::for_each(vertices.begin(), vertices.end(), DrawVertex());
     glEnd();
 
 //    glPopMatrix();
 
     glMatrixMode(GL_COLOR);
+    glPopMatrix();
+}
+
+void OpenglDrawer::drawSphere(float r, const Color &color)
+{
+    glMatrixMode(GL_COLOR);
+    glPushMatrix();
+
+    glColor4f(color.r, color.g, color.b, color.a);
+    glutSolidSphere(r, 20, 20);
+
     glPopMatrix();
 }
 
@@ -111,6 +153,31 @@ void OpenglDrawer::drawString(const std::string &str)
     for(size_t i = 0; i < length;
         glutStrokeCharacter(GLUT_STROKE_MONO_ROMAN, str[i++]));
 #endif
+}
+
+void OpenglDrawer::push(int mode)
+{
+    glMatrixMode(mode);
+    glPushMatrix();
+}
+
+void OpenglDrawer::pop(int mode)
+{
+    glMatrixMode(mode);
+    glPopMatrix();
+}
+
+void OpenglDrawer::translate(int mode, float x, float y, float z)
+{
+    glMatrixMode(mode);
+    glTranslatef(x, y, z);
+}
+
+void OpenglDrawer::rotate(int mode, float angleDegrees,
+    float x, float y, float z)
+{
+    glMatrixMode(mode);
+    glRotatef(angleDegrees, x, y, z);
 }
 
 }

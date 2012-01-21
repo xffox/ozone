@@ -8,8 +8,10 @@
 #include "render/KeyboardEvent.h"
 #include "render/MouseMotionEvent.h"
 #include "ozone/GameObjectFactory.h"
+
 #include "game/object/Point.h"
 #include "game/object/Wall.h"
+#include "game/object/Light.h"
 
 using namespace ozone;
 
@@ -42,32 +44,27 @@ void NativeGameLogic::load(WorldModel::WorldAccess *worldAccess)
     worldAccess->clear();
 
     createWall(worldAccess,
-        geom::Point(-10.0, -10.0, -20.0),
-        geom::Point(-10.0, 10.0, -20.0),
-        geom::Point(10.0, -10.0, -20.0),
-        geom::Point(10.0, 10.0, -20.0),
+        geom::Point(.0, .0, -20.0),
+        20.0, 20.0, geom::Angle(M_PI),
         render::Color(1.0, .0, .0));
 
     createWall(worldAccess,
-        geom::Point(-10.0, -10.0, 20.0),
-        geom::Point(-10.0, 10.0, 20.0),
-        geom::Point(-10.0, -10.0, -20.0),
-        geom::Point(-10.0, 10.0, -20.0),
-        render::Color(.0, .0, 1.0));
-
-    createWall(worldAccess,
-        geom::Point(10.0, -10.0, 20.0),
-        geom::Point(10.0, 10.0, 20.0),
-        geom::Point(10.0, -10.0, -20.0),
-        geom::Point(10.0, 10.0, -20.0),
+        geom::Point(.0, .0, 20.0),
+        20.0, 20.0, geom::Angle(.0),
         render::Color(.0, 1.0, .0));
 
     createWall(worldAccess,
-        geom::Point(-10.0, -10.0, 20.0),
-        geom::Point(-10.0, 10.0, 20.0),
-        geom::Point(10.0, -10.0, 20.0),
-        geom::Point(10.0, 10.0, 20.0),
+        geom::Point(10.0, .0, .0),
+        40.0, 20.0, geom::Angle(M_PI_2),
+        render::Color(.0, .0, 1.0));
+
+    createWall(worldAccess,
+        geom::Point(-10.0, .0, .0),
+        40.0, 20.0, geom::Angle(-M_PI_2),
         render::Color(1.0, 1.0, .0));
+
+    createLight(worldAccess,
+        geom::Point(5.0, 5.0, -10.0));
 }
 
 void NativeGameLogic::save(WorldModel::WorldAccess*)
@@ -131,8 +128,13 @@ void NativeGameLogic::process(WorldModel::WorldAccess *worldAccess,
             ViewAngle viewAngle = worldAccess->getViewAngle();
             viewAngle[1].setDegrees(viewAngle[1].getDegrees() +
                 mouseX - mouseMotionEvent->getX());
-            viewAngle[0].setDegrees(viewAngle[0].getDegrees() +
-                mouseY - mouseMotionEvent->getY());
+            double xAngle = viewAngle[0].getDegrees() +
+                mouseY - mouseMotionEvent->getY();
+            if(xAngle < -90.0)
+                xAngle = -90.0;
+            else if(xAngle > 90.0)
+                xAngle = 90.0;
+            viewAngle[0].setDegrees(xAngle);
             mouseY = mouseMotionEvent->getY();
             mouseX = mouseMotionEvent->getX();
             worldAccess->setViewAngle(viewAngle);
@@ -141,24 +143,31 @@ void NativeGameLogic::process(WorldModel::WorldAccess *worldAccess,
     }
 }
 
-void NativeGameLogic::createWall(WorldModel::WorldAccess *worldAccess,
-    const geom::Point &bottomLeft,
-    const geom::Point &topLeft,
-    const geom::Point &bottomRight,
-    const geom::Point &topRight,
-    const render::Color &color)
+void NativeGameLogic::createWall(ozone::WorldModel::WorldAccess *worldAccess,
+    const geom::Point &center, float width, float height,
+    const geom::Angle &yAngle, const render::Color &color)
 {
     object::Wall *wall = dynamic_cast<object::Wall*>(
         factory->CreateObject(worldAccess, "wall"));
     assert(wall);
-    wall->setBottomLeft(bottomLeft);
-    wall->setTopLeft(topLeft);
-    wall->setBottomRight(bottomRight);
-    wall->setTopRight(topRight);
 
+    wall->setCenter(center);
+    wall->setWidth(width);
+    wall->setHeight(height);
+    wall->setYAngle(yAngle);
     wall->setColor(color);
 
     walls.push_back(wall);
+}
+
+void NativeGameLogic::createLight(ozone::WorldModel::WorldAccess *worldAccess,
+            const geom::Point &position)
+{
+    object::Light *light = dynamic_cast<object::Light*>(
+        factory->CreateObject(worldAccess, "light"));
+    assert(light);
+
+    light->setPosition(position);
 }
 
 }

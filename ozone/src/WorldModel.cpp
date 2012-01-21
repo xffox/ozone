@@ -1,8 +1,59 @@
 #include "ozone/WorldModel.h"
 
 #include <exception>
+#include <cassert>
 
 #include "ozone/World.h"
+#include "ozone/WorldObserver.h"
+
+namespace
+{
+    class NotifyAdded
+    {
+    public:
+        NotifyAdded(ozone::GameObject *object)
+            :object(object)
+        {
+            assert(object);
+        }
+
+        void operator()(ozone::WorldObserver *observer) const
+        {
+            assert(observer);
+            observer->added(object);
+        }
+
+    private:
+        ozone::GameObject *object;
+    };
+
+    class NotifyRemoved
+    {
+    public:
+        NotifyRemoved(ozone::GameObject *object)
+            :object(object)
+        {
+        }
+
+        void operator()(ozone::WorldObserver *observer) const
+        {
+            assert(observer);
+            observer->removed(object);
+        }
+
+    private:
+        ozone::GameObject *object;
+    };
+
+    struct NotifyCleared
+    {
+        void operator()(ozone::WorldObserver *observer) const
+        {
+            assert(observer);
+            observer->cleared();
+        }
+    };
+}
 
 namespace ozone
 {
@@ -42,16 +93,19 @@ size_t WorldModel::WorldAccess::objectsCount() const
 void WorldModel::WorldAccess::add(GameObject *object)
 {
     worldModel->world->add(object);
+    worldModel->notifyAdded(object);
 }
 
 void WorldModel::WorldAccess::remove(GameObject *object)
 {
     worldModel->world->remove(object);
+    worldModel->notifyRemoved(object);
 }
 
 void WorldModel::WorldAccess::clear()
 {
     worldModel->world->clear();
+    worldModel->notifyCleared();
 }
 
 const ViewPos &WorldModel::WorldAccess::getViewPos() const
@@ -74,6 +128,16 @@ void WorldModel::WorldAccess::setViewAngle(const ViewAngle &viewAngle)
     worldModel->world->setViewAngle(viewAngle);
 }
 
+void WorldModel::WorldAccess::addObserver(WorldObserver *observer)
+{
+    worldModel->addObserver(observer);
+}
+
+void WorldModel::WorldAccess::removeObserver(WorldObserver *observer)
+{
+    worldModel->removeObserver(observer);
+}
+
 WorldModel::WorldModel(World *world)
     :world(world), accessMutex()
 {
@@ -84,6 +148,22 @@ WorldModel::WorldModel(World *world)
 std::auto_ptr<WorldModel::WorldAccess> WorldModel::access()
 {
     return std::auto_ptr<WorldAccess>(new WorldAccess(this));
+}
+
+// TODO: probably add access object to notifications too
+void WorldModel::notifyAdded(GameObject *object)
+{
+    notify(NotifyAdded(object));
+}
+
+void WorldModel::notifyRemoved(GameObject *object)
+{
+    notify(NotifyRemoved(object));
+}
+
+void WorldModel::notifyCleared()
+{
+    notify(NotifyCleared());
 }
 
 }

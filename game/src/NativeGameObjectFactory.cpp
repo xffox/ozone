@@ -4,6 +4,7 @@
 
 #include "game/object/Point.h"
 #include "game/object/Wall.h"
+#include "game/object/Light.h"
 
 using namespace ozone;
 
@@ -21,6 +22,10 @@ GameObject *NativeGameObjectFactory::CreateObject(
     if("wall" == type)
     {
         gameObject.reset(new object::Wall);
+    }
+    if("light" == type)
+    {
+        gameObject.reset(new object::Light);
     }
 
     if(gameObject.get())

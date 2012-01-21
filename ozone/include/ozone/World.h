@@ -9,6 +9,10 @@ namespace ozone
 {
     class GameObject;
 
+    //! World state.
+    /*!
+     * Stores all game object, view state and provides access to them.
+     */
     class World
     {
     public:
@@ -18,8 +22,18 @@ namespace ozone
         World();
         ~World();
 
+        //! Add game object to the world.
+        /*!
+         * Takes responsibility for the object deletion.
+         * \param object added game object.
+         */
         void add(GameObject *object);
+        //! Remove object from the world.
+        /*!
+         * \param object removed game object.
+         */
         void remove(GameObject *object);
+        //! Remove all game objects.
         void clear();
 
         const ViewPos &getViewPos() const

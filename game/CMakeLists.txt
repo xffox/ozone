@@ -16,6 +16,7 @@ set(GAME_SRCS
 
     src/object/Point.cpp
     src/object/Wall.cpp
+    src/object/Light.cpp
     )
 
 add_library(game MODULE ${GAME_SRCS})

@@ -5,7 +5,7 @@
 
 #include "util/Runnable.h"
 #include "render/Render.h"
-#include "render/opengl/View.h"
+#include "render/opengl/OpenglView.h"
 
 namespace util
 {
@@ -54,7 +54,7 @@ namespace render
 
         Client *client;
         EventClient *eventClient;
-        View view;
+        OpenglView view;
 
     private:
         static OpenglRender *currentRender;

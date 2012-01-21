@@ -3,6 +3,11 @@
 
 #include "render/Client.h"
 
+namespace render
+{
+    class View;
+}
+
 namespace ozone
 {
     class WorldModel;
@@ -13,7 +18,7 @@ namespace ozone
     public:
         RenderClient(WorldModel *model, RenderLogic *renderLogic);
 
-        virtual void init();
+        virtual void init(render::View *view);
         virtual void destroy();
         virtual void draw(render::Drawer *drawer);
 

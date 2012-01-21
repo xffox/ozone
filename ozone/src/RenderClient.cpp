@@ -18,16 +18,18 @@ RenderClient::RenderClient(WorldModel *model, RenderLogic *renderLogic)
         throw std::exception();
 }
 
-void RenderClient::init()
+void RenderClient::init(render::View *view)
 {
     assert(renderLogic);
-    renderLogic->init();
+    std::auto_ptr<WorldModel::WorldAccess> access(model->access());
+    renderLogic->init(view, access.get());
 }
 
 void RenderClient::destroy()
 {
     assert(renderLogic);
-    renderLogic->destroy();
+    std::auto_ptr<WorldModel::WorldAccess> access(model->access());
+    renderLogic->destroy(access.get());
 }
 
 void RenderClient::draw(render::Drawer *drawer)

@@ -14,6 +14,7 @@ namespace render
 namespace geom
 {
     class Point;
+    class Angle;
 }
 
 namespace game
@@ -43,11 +44,10 @@ namespace game
         NativeGameLogic &operator=(const NativeGameLogic&);
 
         void createWall(ozone::WorldModel::WorldAccess *worldAccess,
-            const geom::Point &bottomLeft,
-            const geom::Point &topLeft,
-            const geom::Point &bottomRight,
-            const geom::Point &topRight,
-            const render::Color &color);
+            const geom::Point &center, float width, float height,
+            const geom::Angle &yAngle, const render::Color &color);
+        void createLight(ozone::WorldModel::WorldAccess *worldAccess,
+            const geom::Point &position);
 
     private:
         ozone::GameObjectFactory *factory;

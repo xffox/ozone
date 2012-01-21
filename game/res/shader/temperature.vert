@@ -1,5 +1,5 @@
 void main()
 {
-    gl_Position = gl_ModelViewProjectionMatrix*gl_Vertex;
+    gl_Position = ftransform();
     gl_FrontColor = gl_Color;
 }

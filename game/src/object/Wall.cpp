@@ -7,61 +7,17 @@ namespace game
 namespace object
 {
 Wall::Wall()
-    :vertices(), color(.0f, .0f, .0f)
+    :center(), width(.0f), height(.0f), yAngle(), color(.0, .0, .0),
+    vertices(4)
 {
-    vertices.resize(4, geom::Point(.0, .0, .0));
 }
 
-Wall::Wall(const geom::Point &bottomLeft, const geom::Point &topLeft,
-    const geom::Point &bottomRight, const geom::Point &topRight,
-    const render::Color &color)
-    :vertices(), color(color)
+Wall::Wall(const geom::Point &center, float width, float height,
+    const geom::Angle &yAngle, const render::Color &color)
+    :center(center), width(width), height(height), yAngle(yAngle),
+    color(color), vertices(4)
 {
-    vertices.reserve(4);
-    vertices.push_back(bottomLeft);
-    vertices.push_back(topLeft);
-    vertices.push_back(bottomRight);
-    vertices.push_back(topRight);
-}
-
-void Wall::setBottomLeft(const geom::Point &p)
-{
-    vertices[BOTTOM_LEFT] = p;
-}
-
-void Wall::setTopLeft(const geom::Point &p)
-{
-    vertices[TOP_LEFT] = p;
-}
-
-void Wall::setBottomRight(const geom::Point &p)
-{
-    vertices[BOTTOM_RIGHT] = p;
-}
-
-void Wall::setTopRight(const geom::Point &p)
-{
-    vertices[TOP_RIGHT] = p;
-}
-
-const geom::Point &Wall::getBottomLeft() const
-{
-    return vertices[BOTTOM_LEFT];
-}
-
-const geom::Point &Wall::getTopLeft() const
-{
-    return vertices[TOP_LEFT];
-}
-
-const geom::Point &Wall::getBottomRight() const
-{
-    return vertices[BOTTOM_RIGHT];
-}
-
-const geom::Point &Wall::getTopRight() const
-{
-    return vertices[TOP_RIGHT];
+    updateVertices();
 }
 
 void Wall::setColor(const render::Color &color)
@@ -69,10 +25,40 @@ void Wall::setColor(const render::Color &color)
     this->color = color;
 }
 
+void Wall::setWidth(float width)
+{
+    this->width = width;
+    updateVertices();
+}
+
+void Wall::setHeight(float height)
+{
+    this->height = height;
+    updateVertices();
+}
+
 void Wall::draw(render::Drawer *drawer)
 {
+    drawer->pushModelView();
+    drawer->translateModelView(center.x, center.y, center.z);
+    drawer->rotateModelView(yAngle.getDegrees(), .0f, 1.0f, .0f);
     drawer->drawQuadrilateralsStrip(vertices, color);
+    drawer->popModelView();
 }
+
+void Wall::updateVertices()
+{
+    vertices[BOTTOM_LEFT].x = -width/2.0;
+    vertices[BOTTOM_LEFT].y = -height/2.0;
+    vertices[TOP_LEFT].x = -width/2.0;
+    vertices[TOP_LEFT].y = height/2.0;
+    vertices[BOTTOM_RIGHT].x = width/2.0;
+    vertices[BOTTOM_RIGHT].y = -height/2.0;
+    vertices[TOP_RIGHT].x = width/2.0;
+    vertices[TOP_RIGHT].y = height/2.0;
+}
+
+const std::string Wall::type("wall");
 
 }
 }

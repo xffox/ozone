@@ -8,7 +8,8 @@ include_directories("include"
 
 set(OPENGL_RENDER_SRCS
     src/OpenglDrawer.cpp
-    src/View.cpp
+    src/OpenglView.cpp
+    src/OpenglLightDrawer.cpp
 
     src/glsl/ShaderObject.cpp
     src/glsl/VertexShaderObject.cpp

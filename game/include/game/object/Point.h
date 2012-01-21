@@ -14,11 +14,19 @@ namespace game
         Point();
         Point(float x, float y);
 
+        virtual const std::string &getType() const
+        {
+            return type;
+        }
+
         virtual void draw(render::Drawer *drawer);
 
     public:
         float x;
         float y;
+
+    private:
+        static const std::string type;
     };
 
     }

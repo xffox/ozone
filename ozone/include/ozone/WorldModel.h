@@ -6,14 +6,17 @@
 #include <memory>
 #include <cstddef>
 
+#include "util/Observable.h"
+
 #include "Defs.h"
 
 namespace ozone
 {
     class World;
     class GameObject;
+    class WorldObserver;
 
-    class WorldModel
+    class WorldModel: public util::Observable<WorldObserver>
     {
     public:
         class WorldAccess
@@ -36,6 +39,9 @@ namespace ozone
             const ViewAngle &getViewAngle() const;
             void setViewAngle(const ViewAngle &viewAngle);
 
+            void addObserver(WorldObserver *observer);
+            void removeObserver(WorldObserver *observer);
+
         private:
             WorldAccess(const WorldAccess&);
             WorldAccess &operator=(const WorldAccess&);
@@ -53,6 +59,10 @@ namespace ozone
     private:
         WorldModel(const WorldModel&);
         WorldModel &operator=(const WorldModel&);
+
+        void notifyAdded(GameObject *object);
+        void notifyRemoved(GameObject *object);
+        void notifyCleared();
 
     private:
         World *world;

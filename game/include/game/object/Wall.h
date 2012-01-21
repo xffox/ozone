@@ -2,6 +2,7 @@
 #define GAME_OBJECT_WALL_H
 
 #include "geom/Point.h"
+#include "geom/Angle.h"
 #include "render/Color.h"
 #include "ozone/GameObject.h"
 
@@ -25,28 +26,45 @@ namespace game
 
     public:
         Wall();
-        Wall(const geom::Point &bottomLeft, const geom::Point &topLeft,
-            const geom::Point &bottomRight, const geom::Point &topRight,
-            const render::Color &color);
+        Wall(const geom::Point &center, float width, float height,
+            const geom::Angle &yAngle, const render::Color &color);
+
+        virtual const std::string &getType() const
+        {
+            return type;
+        }
 
         virtual void draw(render::Drawer *drawer);
 
-        void setBottomLeft(const geom::Point &p);
-        void setTopLeft(const geom::Point &p);
-        void setBottomRight(const geom::Point &p);
-        void setTopRight(const geom::Point &p);
+        void setCenter(const geom::Point &center)
+        {
+            this->center = center;
+        }
 
-        const geom::Point &getBottomLeft() const;
-        const geom::Point &getTopLeft() const;
-        const geom::Point &getBottomRight() const;
-        const geom::Point &getTopRight() const;
+        void setYAngle(const geom::Angle &yAngle)
+        {
+            this->yAngle = yAngle;
+        }
+
+        void setWidth(float width);
+        void setHeight(float height);
 
         void setColor(const render::Color &color);
 
     private:
+        void updateVertices();
+
+    private:
+        geom::Point center;
+        float width;
+        float height;
+        geom::Angle yAngle;
+        render::Color color;
+
         Vertices vertices;
 
-        render::Color color;
+    private:
+        static const std::string type;
     };
     }
 }

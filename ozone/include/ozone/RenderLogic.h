@@ -5,6 +5,7 @@
 
 namespace render
 {
+    class View;
     class Drawer;
 }
 
@@ -15,8 +16,9 @@ namespace ozone
     public:
         virtual ~RenderLogic(){}
 
-        virtual void init() = 0;
-        virtual void destroy() = 0;
+        virtual void init(render::View *view,
+            WorldModel::WorldAccess *worldAccess) = 0;
+        virtual void destroy(WorldModel::WorldAccess *worldAccess) = 0;
         virtual void draw(WorldModel::WorldAccess *worldAccess,
             render::Drawer *drawer) = 0;
     };
