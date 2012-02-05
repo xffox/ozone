@@ -23,6 +23,7 @@ add_library(game MODULE ${GAME_SRCS})
 
 file(GLOB GAME_SHADERS ${CMAKE_CURRENT_SOURCE_DIR}/res/shader/*)
 
+# TODO: this is wrong, it's slow downs compilation
 set(SHADERS_DIR "${PROJECT_BINARY_DIR}/shader")
 add_custom_target(shaders_directory ALL
     ${CMAKE_COMMAND} -E make_directory "${SHADERS_DIR}"

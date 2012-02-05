@@ -10,6 +10,8 @@ set(UTIL_SRCS
     src/Thread.cpp
     src/Time.cpp
     src/IndexProvider.cpp
+    src/typed/TypeIdAllocator.cpp
+    src/typed/TypedVector.cpp
     )
 
 if(UNIX)

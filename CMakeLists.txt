@@ -13,6 +13,7 @@ if(UNIX)
 elseif(WIN32)
     # "-static" - make it static to run without libs
     # "-Wl,--subsystem,windows" - make window application
+    # TODO: WIN32 in add_executable()
     set(ADD_FLAGS "-static -Wl,--subsystem,windows")
 endif()
 

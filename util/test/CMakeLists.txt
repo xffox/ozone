@@ -5,6 +5,7 @@ pkg_search_module(CPPUNIT cppunit)
 if(CPPUNIT_FOUND)
     set(UTIL_TEST_SRCS test.cpp
         IndexProviderTest.cpp
+        TypedVectorTest.cpp
         )
 
     add_executable(util_test ${UTIL_TEST_SRCS})
