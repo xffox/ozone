@@ -16,6 +16,7 @@ namespace render
 
     class Color;
     class View;
+    class VerticesData;
 
     class Drawer
     {
@@ -38,6 +39,7 @@ namespace render
             const Color &color) = 0;
         virtual void drawQuadrilateralsStrip(const Vertices &vertices,
                 const Color &color) = 0;
+        virtual void drawQuadrilateralsStrip(const VerticesData &data) = 0;
         virtual void drawSphere(float r, const Color &color) = 0;
         virtual void drawText(const std::string &text, float x, float y) = 0;
     };

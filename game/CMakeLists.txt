@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 2.6)
 
-include_directories("include"
+include_directories(
+    "include"
     "${PROJECT_SOURCE_DIR}/render/include"
     "${PROJECT_SOURCE_DIR}/util/include"
     "${PROJECT_SOURCE_DIR}/render/opengl/include"

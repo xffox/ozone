@@ -12,6 +12,7 @@ set(UTIL_SRCS
     src/IndexProvider.cpp
     src/typed/TypeIdAllocator.cpp
     src/typed/TypedVector.cpp
+    src/typed/TypedStrideVector.cpp
     )
 
 if(UNIX)

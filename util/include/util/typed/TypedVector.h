@@ -11,6 +11,7 @@ namespace util
 {
     namespace typed
     {
+    //TODO: iterators
     /*!
      * Vector container that represents single object type
      * but can be parametrized with contained type.

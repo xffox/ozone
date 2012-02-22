@@ -9,6 +9,7 @@
 
 #include "geom/Point.h"
 #include "render/Color.h"
+#include "render/VerticesData.h"
 
 namespace
 {
@@ -107,6 +108,16 @@ void OpenglDrawer::drawQuadrilateralsStrip(const Vertices &vertices,
 
     glMatrixMode(GL_COLOR);
     glPopMatrix();
+}
+
+void OpenglDrawer::drawQuadrilateralsStrip(const VerticesData &data)
+{
+    glBegin(GL_QUAD_STRIP);
+        glNormal3f(.0f, .0f, -1.0f);
+        for(std::size_t i = 0; i < data.size(); ++i)
+        {
+        }
+    glEnd();
 }
 
 void OpenglDrawer::drawSphere(float r, const Color &color)

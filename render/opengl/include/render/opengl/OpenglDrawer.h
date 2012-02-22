@@ -27,6 +27,7 @@ namespace render
         virtual void drawPoint(float x, float y, const Color &color);
         virtual void drawQuadrilateralsStrip(const Vertices &vertices,
                 const Color &color);
+        virtual void drawQuadrilateralsStrip(const VerticesData &data);
         virtual void drawSphere(float r, const Color &color);
         virtual void drawText(const std::string &text, float x, float y);
 

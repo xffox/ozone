@@ -6,6 +6,7 @@ if(CPPUNIT_FOUND)
     set(UTIL_TEST_SRCS test.cpp
         IndexProviderTest.cpp
         TypedVectorTest.cpp
+        TypedStrideVectorTest.cpp
         )
 
     add_executable(util_test ${UTIL_TEST_SRCS})

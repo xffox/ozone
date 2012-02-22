@@ -10,3 +10,5 @@ set(GEOM_SRCS
 add_library(geom SHARED
     ${GEOM_SRCS}
     )
+
+add_subdirectory(test)

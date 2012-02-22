@@ -12,6 +12,16 @@ namespace geom
         double y;
         double z;
     };
+
+    inline bool operator==(const Point& left, const Point& right)
+    {
+        return left.x == right.x && left.y == right.y && left.z == right.z;
+    }
+
+    inline bool operator!=(const Point& left, const Point& right)
+    {
+        return !(left == right);
+    }
 }
 
 #endif

@@ -16,7 +16,7 @@ namespace util
         CPPUNIT_TEST(testCreate);
         CPPUNIT_TEST(testResize);
         CPPUNIT_TEST(testTypedResize);
-        CPPUNIT_TEST(testCopyCreate);
+        CPPUNIT_TEST(testCopyConstruct);
         CPPUNIT_TEST(testCopySameType);
         CPPUNIT_TEST(testCopyDiffType);
         CPPUNIT_TEST(testSetValue);
@@ -49,7 +49,7 @@ namespace util
                 CPPUNIT_ASSERT(v.at<int>(i) == initValue);
         }
 
-        void testCopyCreate()
+        void testCopyConstruct()
         {
             TypedVector v = TypedVector::create<int>();
             const std::size_t size = 42;
