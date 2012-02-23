@@ -50,13 +50,14 @@ namespace game
 
     private:
         void updateVertices();
+        void updateNormals();
+        void updateColors(const render::Color &color);
 
     private:
         geom::Point center;
         float width;
         float height;
         geom::Angle yAngle;
-        render::Color color;
 
         render::VerticesData verticesData;
 

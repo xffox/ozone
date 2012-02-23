@@ -9,25 +9,28 @@ namespace game
 namespace object
 {
 Wall::Wall()
-    :center(), width(.0f), height(.0f), yAngle(), color(.0, .0, .0),
-    verticesData()
+    :center(), width(.0f), height(.0f), yAngle(), verticesData()
 {
     verticesData.resize(4);
+    updateVertices();
+    updateNormals();
+    updateColors(render::Color());
 }
 
 Wall::Wall(const geom::Point &center, float width, float height,
     const geom::Angle &yAngle, const render::Color &color)
     :center(center), width(width), height(height), yAngle(yAngle),
-    color(color), verticesData()
+    verticesData()
 {
     verticesData.resize(4);
     updateVertices();
+    updateNormals();
+    updateColors(color);
 }
 
 void Wall::setColor(const render::Color &color)
 {
-    this->color = color;
-    updateVertices();
+    updateColors(color);
 }
 
 void Wall::setWidth(float width)
@@ -63,7 +66,10 @@ void Wall::updateVertices()
     verticesData.getVertex<float>(BOTTOM_RIGHT).at(1) = -height/2.0;
     verticesData.getVertex<float>(TOP_RIGHT).at(0) = width/2.0;
     verticesData.getVertex<float>(TOP_RIGHT).at(1) = height/2.0;
+}
 
+void Wall::updateNormals()
+{
     typedef std::vector<float> NormalContainer;
     NormalContainer normalBuf(3);
     normalBuf[0] = .0f;
@@ -73,7 +79,10 @@ void Wall::updateVertices()
     verticesData.getNormal<float>(TOP_LEFT) = normalBuf;
     verticesData.getNormal<float>(BOTTOM_RIGHT) = normalBuf;
     verticesData.getNormal<float>(TOP_RIGHT) = normalBuf;
+}
 
+void Wall::updateColors(const render::Color &color)
+{
     typedef std::vector<float> ColorContainer;
     ColorContainer colorBuf(3);
     colorBuf[0] = color.r;
