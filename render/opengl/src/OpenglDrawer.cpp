@@ -112,12 +112,26 @@ void OpenglDrawer::drawQuadrilateralsStrip(const Vertices &vertices,
 
 void OpenglDrawer::drawQuadrilateralsStrip(const VerticesData &data)
 {
-    glBegin(GL_QUAD_STRIP);
-        glNormal3f(.0f, .0f, -1.0f);
-        for(std::size_t i = 0; i < data.size(); ++i)
-        {
-        }
-    glEnd();
+    util::typed::TypedStrideVector::ConstReference<float> vertex =
+        data.getVertex<float>(0);
+    glVertexPointer(vertex.getQuantum(), GL_FLOAT, 0, &vertex[0]);
+    glEnableClientState(GL_VERTEX_ARRAY);
+
+    util::typed::TypedStrideVector::ConstReference<float> normal =
+        data.getNormal<float>(0);
+    glNormalPointer(GL_FLOAT, 0, &normal[0]);
+    glEnableClientState(GL_NORMAL_ARRAY);
+
+    util::typed::TypedStrideVector::ConstReference<float> color =
+        data.getColor<float>(0);
+    glColorPointer(color.getQuantum(), GL_FLOAT, 0, &color[0]);
+    glEnableClientState(GL_COLOR_ARRAY);
+
+    glDrawArrays(GL_QUAD_STRIP, 0, data.size());
+
+    glDisableClientState(GL_VERTEX_ARRAY);
+    glDisableClientState(GL_NORMAL_ARRAY);
+    glDisableClientState(GL_COLOR_ARRAY);
 }
 
 void OpenglDrawer::drawSphere(float r, const Color &color)

@@ -1,6 +1,9 @@
 #ifndef UTIL_TYPED_TYPED_STRIDE_VECTOR_H
 #define UTIL_TYPED_TYPED_STRIDE_VECTOR_H
 
+#include <algorithm>
+#include <vector>
+
 #include "util/typed/TypedVector.h"
 
 namespace util
@@ -21,6 +24,21 @@ namespace util
             T &operator[](std::size_t index);
             const T &operator[](std::size_t index) const;
 
+            T &at(std::size_t index);
+            const T &at(std::size_t index) const;
+
+            Reference<T> &operator=(const std::vector<T> &that);
+
+            std::size_t getQuantum() const
+            {
+                return datum.getQuantum();
+            }
+
+            std::size_t getStride() const
+            {
+                return datum.getStride();
+            }
+
         private:
             Reference(TypedStrideVector &datum, std::size_t index);
 
@@ -37,6 +55,19 @@ namespace util
         public:
             const T &operator[](std::size_t index);
             const T &operator[](std::size_t index) const;
+
+            const T &at(std::size_t index);
+            const T &at(std::size_t index) const;
+
+            std::size_t getQuantum() const
+            {
+                return datum.getQuantum();
+            }
+
+            std::size_t getStride() const
+            {
+                return datum.getStride();
+            }
 
         private:
             ConstReference(const TypedStrideVector &datum, std::size_t index);
@@ -64,7 +95,14 @@ namespace util
         template<typename T>
         ConstReference<T> at(std::size_t index) const;
 
+        //! Change size to specified.
+        /*!
+         * Extra items will be default-constructed.
+         */
         void resize(std::size_t size);
+        //! Change size to specified using value to construct extra items.
+        template<typename T>
+        void resize(std::size_t size, const T &val = T());
 
     public:
         template<typename T>
@@ -76,6 +114,7 @@ namespace util
     private:
         TypedStrideVector(const TypedVector &data, std::size_t quantum,
             std::size_t stride);
+        std::size_t calculateDataSize(std::size_t size) const;
 
     private:
         TypedVector data;
@@ -95,7 +134,7 @@ namespace util
     template<typename T>
     T &TypedStrideVector::Reference<T>::operator[](std::size_t index)
     {
-        return this->datum.data.at<T>(this->datumIndex + index);
+        return datum.data.at<T>(datumIndex + index);
     }
 
     template<typename T>
@@ -103,6 +142,34 @@ namespace util
         std::size_t index) const
     {
         return const_cast<Reference<T>*>(this)->operator[](index);
+    }
+
+    template<typename T>
+    T &TypedStrideVector::Reference<T>::at(std::size_t index)
+    {
+        if(index < datum.getQuantum())
+        {
+            return datum.data.at<T>(datumIndex + index);
+        }
+        throw std::exception();
+    }
+
+    template<typename T>
+    const T &TypedStrideVector::Reference<T>::at(std::size_t index) const
+    {
+        return const_cast<Reference<T>*>(this)->at(index);
+    }
+
+    template<typename T>
+    TypedStrideVector::Reference<T>&
+    TypedStrideVector::Reference<T>::operator=(const std::vector<T> &that)
+    {
+        const std::size_t copySize = std::min(datum.getQuantum(), that.size());
+        typename std::vector<T>::const_iterator iter = that.begin();
+        for(std::size_t i = 0; i < copySize; ++i, ++iter)
+            (*this)[i] = *iter;
+
+        return *this;
     }
 
     template<typename T>
@@ -118,7 +185,7 @@ namespace util
     const T &TypedStrideVector::ConstReference<T>::operator[](
         std::size_t index)
     {
-        return this->datum.data.at<T>(this->datumIndex + index);
+        return datum.data.at<T>(datumIndex + index);
     }
 
     template<typename T>
@@ -126,6 +193,22 @@ namespace util
         std::size_t index) const
     {
         return const_cast<Reference<T>*>(this)->operator[](index);
+    }
+
+    template<typename T>
+    const T &TypedStrideVector::ConstReference<T>::at(std::size_t index)
+    {
+        if(index < datum.getQuantum())
+        {
+            return datum.data.at<T>(datumIndex + index);
+        }
+        throw std::exception();
+    }
+
+    template<typename T>
+    const T &TypedStrideVector::ConstReference<T>::at(std::size_t index) const
+    {
+        return const_cast<Reference<T>*>(this)->at(index);
     }
 
     template<typename T>
@@ -139,6 +222,12 @@ namespace util
         std::size_t index) const
     {
         return ConstReference<T>(*this, index);
+    }
+
+    template<typename T>
+    void TypedStrideVector::resize(std::size_t size, const T &val)
+    {
+        data.resize<T>(calculateDataSize(size), val);
     }
 
     template<typename T>

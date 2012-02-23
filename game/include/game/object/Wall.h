@@ -1,12 +1,11 @@
 #ifndef GAME_OBJECT_WALL_H
 #define GAME_OBJECT_WALL_H
 
+#include "render/VerticesData.h"
 #include "geom/Point.h"
 #include "geom/Angle.h"
 #include "render/Color.h"
 #include "ozone/GameObject.h"
-
-#include <vector>
 
 namespace game
 {
@@ -14,8 +13,6 @@ namespace game
     {
     class Wall: public ozone::GameObject
     {
-        typedef std::vector<geom::Point> Vertices;
-
         enum IDX
         {
             BOTTOM_LEFT,
@@ -61,7 +58,7 @@ namespace game
         geom::Angle yAngle;
         render::Color color;
 
-        Vertices vertices;
+        render::VerticesData verticesData;
 
     private:
         static const std::string type;

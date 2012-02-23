@@ -24,14 +24,19 @@ std::size_t TypedStrideVector::size() const
 
 void TypedStrideVector::resize(std::size_t size)
 {
+    data.resize(calculateDataSize(size));
+}
+
+std::size_t TypedStrideVector::calculateDataSize(std::size_t size) const
+{
     if(stride >= quantum)
     {
-        data.resize(stride*size);
+        return stride*size;
     }
     else
     {
         const std::size_t notEmpty = !!size;
-        data.resize((size - notEmpty)*stride + notEmpty*quantum);
+        return (size - notEmpty)*stride + notEmpty*quantum;
     }
 }
 
