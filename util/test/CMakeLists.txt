@@ -3,6 +3,8 @@ include(FindPkgConfig)
 
 pkg_search_module(CPPUNIT cppunit)
 if(CPPUNIT_FOUND)
+    unset(EXECUTABLE_OUTPUT_PATH)
+
     set(UTIL_TEST_SRCS test.cpp
         IndexProviderTest.cpp
         TypedVectorTest.cpp

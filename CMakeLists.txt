@@ -19,6 +19,7 @@ endif()
 
 set(CMAKE_CXX_FLAGS
     "${CMAKE_CXX_FLAGS} ${WARN_FLAGS} ${DEBUG_FLAGS} ${ADD_FLAGS}")
+set(LINK_FLAGS "${LINK_FLAGS}")
 
 add_subdirectory(util)
 add_subdirectory(render)

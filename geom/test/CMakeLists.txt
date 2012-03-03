@@ -3,6 +3,8 @@ include(FindPkgConfig)
 
 pkg_search_module(CPPUNIT cppunit)
 if(CPPUNIT_FOUND)
+    unset(EXECUTABLE_OUTPUT_PATH)
+
     set(GEOM_TEST_SRCS test.cpp
         PointTest.cpp
         )
