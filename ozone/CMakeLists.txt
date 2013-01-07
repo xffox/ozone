@@ -35,4 +35,4 @@ endif()
 add_executable(ozone
     ${OZONE_SRCS}
     )
-target_link_libraries(ozone geom render openglrender)
+target_link_libraries(ozone geom render openglrender dl)
