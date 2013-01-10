@@ -44,6 +44,7 @@ add_library(openglrender SHARED
 
 if(UNIX)
     target_link_libraries(openglrender render
+        GL
         glut
         GLU
         GLEW
